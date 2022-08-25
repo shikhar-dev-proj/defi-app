@@ -3,13 +3,14 @@ import {
   Spacer,
   Spinner,
   Text,
-  theme,
   useClipboard
 } from "@chakra-ui/react"
 import axios from "axios";
 import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { FaClipboardCheck, FaRegCopy } from "react-icons/fa";
+import { NavBar } from "./components/NavBar";
+import { theme } from "./theme";
 import { formatAddress } from "./utils";
 
 export const App = () => {
@@ -58,23 +59,32 @@ export const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" background='#000000' templateColumns='1fr 10fr'>
-          <Grid borderRight='1px solid #212121'>
-            
-          </Grid>
+        <Grid minH="100vh" background='#000000' templateColumns='1fr 8fr'>
+          <NavBar />
           <Grid p={3} templateRows='3rem 1fr'>
             <Grid templateColumns='1fr 9rem'>
-              <Spacer/>
+              <Spacer />
               {
                 address ?
-                  <Flex alignItems='center' padding='0.5rem' border='1px solid' borderRadius='4px'>
-                    <Text fontSize='1rem' fontWeight={600} mr='1rem'>{trimmedAddress}</Text>
-                    {hasCopied ? <FaClipboardCheck color="green" fontSize='0.8rem'/> : <FaRegCopy cursor='pointer' color="white" fontSize='0.8rem' onClick={onCopy}/>}
+                  <Flex alignItems='center' padding='0.5rem' borderRadius='4px' bg='#5394ff'>
+                    <Text fontSize='1rem' fontWeight={600} mr='1rem' color='black'>{trimmedAddress}</Text>
+                    {hasCopied ? <FaClipboardCheck color="green" fontSize='0.8rem' /> : <FaRegCopy cursor='pointer' color="black" fontSize='0.8rem' onClick={onCopy} />}
                   </Flex>
-                  : <Spinner/>
+                  : <Spinner />
               }
             </Grid>
-            <Spacer/>
+            <Flex flexWrap='wrap' gap='2rem' m='2rem' p='2rem' maxHeight='50rem' overflow='auto'>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+            </Flex>
           </Grid>
         </Grid>
       </Box>

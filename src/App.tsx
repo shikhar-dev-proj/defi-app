@@ -6,6 +6,7 @@ import {
   theme,
   useClipboard
 } from "@chakra-ui/react"
+import axios from "axios";
 import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { FaClipboardCheck, FaRegCopy } from "react-icons/fa";
@@ -15,7 +16,6 @@ export const App = () => {
 
   const [address, setAddress] = useState('');
   const [trimmedAddress, setTrimmedAddress] = useState('');
-
   const { hasCopied, onCopy } = useClipboard(address);
 
   async function connect() {
@@ -28,6 +28,28 @@ export const App = () => {
       setTrimmedAddress(formatAddress(account))
     }
   }
+
+  // async function getPools() {
+  //   const pools = await axios.post(
+  //     'https://gateway.thegraph.com/api/1464c9756cf848bb444930c8f1ccdf87/subgraphs/id/3nXfK3RbFrj6mhkGdoKRowEEti2WvmUdxmz73tben6Mb',
+  //     {
+  //       query: `
+  //       {
+  //         pools {
+  //           name
+  //           optionType
+  //           startTimestamp
+  //           totalWithdrawn
+  //           totalDeposited
+  //           averageReturn
+  //           totalVolumeInUsd
+  //         }
+  //       }`
+  //     }
+  //   )
+  //   console.log(pools)
+  //   return pools;
+  // }
 
   useEffect(() => {
     connect()

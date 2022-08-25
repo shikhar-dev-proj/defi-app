@@ -1,0 +1,1 @@
+export const formatAddress = (addr: string): string => addr?.slice(0,4) + '....' + addr?.slice(addr.length-4, addr.length)

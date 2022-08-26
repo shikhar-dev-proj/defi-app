@@ -4,6 +4,7 @@ import { FaKey } from "react-icons/fa"
 import { formatBigNumber, token0, token1 } from "../utils"
 
 export type PoolProps = {
+  key: number
   pool: {
     "name": string
     "optionType": string
@@ -19,11 +20,11 @@ export type PoolProps = {
   }
 }
 
-export const Vault = ({pool}: PoolProps) => {
+export const Vault = ({pool, key}: PoolProps) => {
 
 
   return (
-    <Box h='23.75rem' bg='linear-gradient(rgb(15, 29, 78) 0%, rgb(7, 15, 44) 100%)' borderRadius='1rem' p={3}>
+    <Box key={key} h='23.75rem' bg='linear-gradient(rgb(15, 29, 78) 0%, rgb(7, 15, 44) 100%)' borderRadius='1rem' p={3}>
       <VStack mt={3}>
         <Tag size='lg' variant='outline' colorScheme='cyan'>
           {pool.name}

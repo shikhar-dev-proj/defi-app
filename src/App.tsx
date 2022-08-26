@@ -13,13 +13,16 @@ import { pools } from "./app.const";
 import { NavBar } from "./components/NavBar";
 import { Vault } from "./components/Vault";
 import { theme } from "./theme";
-import { formatAddress } from "./utils";
+import { formatAddress, token0, token1 } from "./utils";
 
 export const App = () => {
 
   const [address, setAddress] = useState('');
   const [trimmedAddress, setTrimmedAddress] = useState('');
   const { hasCopied, onCopy } = useClipboard(address);
+
+  const [personalisedPools, setPersonalisedPools] = useState([...pools])
+  const [snackbar, setSnackbar] = useState(false)
 
   async function connect() {
     if (window.ethereum) {
@@ -32,31 +35,37 @@ export const App = () => {
     }
   }
 
-  // async function getPools() {
-  //   const pools = await axios.post(
-  //     'https://gateway.thegraph.com/api/1464c9756cf848bb444930c8f1ccdf87/subgraphs/id/3nXfK3RbFrj6mhkGdoKRowEEti2WvmUdxmz73tben6Mb',
-  //     {
-  //       query: `
-  //       {
-  //         pools {
-  //           name
-  //           optionType
-  //           startTimestamp
-  //           totalWithdrawn
-  //           totalDeposited
-  //           averageReturn
-  //           totalVolumeInUsd
-  //         }
-  //       }`
-  //     }
-  //   )
-  //   console.log(pools)
-  //   return pools;
-  // }
+  const poolHasEth = (p: any): boolean => token0(p.pairName).id === 'WETH' || token1(p.pairName).id === 'WETH'
+
+  async function getProfileAttributes(address: string) {
+    const res: any = await axios.get(`http://idu-onboarding-qa.zeotap.net/get/${address}`)
+
+    if (res.data?.pool) {
+      const interestedInEth = !!res.data.pool.find((p: any) => {
+        const pairName = p.name.split(' ')[0]
+        return token0(pairName).id === 'WETH' || token1(pairName).id === 'WETH'
+      })
+      if (interestedInEth) {
+        setPersonalisedPools(pools.sort((p1, p2) => {
+          if (poolHasEth(p1)) {
+            return -1
+          } else if (poolHasEth(p2)) {
+            return 1
+          } else return 0
+        }))
+      }
+    }
+  }
 
   useEffect(() => {
     connect()
   }, [])
+
+  useEffect(() => {
+    if (address) {
+      getProfileAttributes('0x022e3ce4eda264b3e3fef62036c8182ceb88e6ce' || address)
+    }
+  }, [address])
 
   return (
     <ChakraProvider theme={theme}>
@@ -76,9 +85,9 @@ export const App = () => {
               }
             </Grid>
             <Flex flexWrap='wrap' gap='4rem' m='2rem' p='2rem' maxHeight='50rem' overflow='auto'>
-              {pools.map(p => 
+              {personalisedPools.map((p, i) => 
                 <Box w='calc((100% - 10rem)/3)' >
-                  <Vault pool={p}/>
+                  <Vault key={i} pool={p}/>
                 </Box>
               )}
             </Flex>

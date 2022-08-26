@@ -61,7 +61,7 @@ export const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" background='#000000' templateColumns='1fr 8fr'>
+        <Grid minH="100vh" maxHeight="60rem" background='#000000' templateColumns='1fr 8fr'>
           <NavBar />
           <Grid p={3} templateRows='3rem 1fr'>
             <Grid templateColumns='1fr 9rem'>
@@ -75,9 +75,9 @@ export const App = () => {
                   : <Spinner />
               }
             </Grid>
-            <Flex flexWrap='wrap' gap='2rem' m='2rem' p='2rem' maxHeight='50rem' overflow='auto'>
+            <Flex flexWrap='wrap' gap='4rem' m='2rem' p='2rem' maxHeight='50rem' overflow='auto'>
               {pools.map(p => 
-                <Box w='calc((100% - 4rem)/3)' >
+                <Box w='calc((100% - 10rem)/3)' >
                   <Vault pool={p}/>
                 </Box>
               )}

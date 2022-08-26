@@ -9,7 +9,9 @@ import axios from "axios";
 import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { FaClipboardCheck, FaRegCopy } from "react-icons/fa";
+import { pools } from "./app.const";
 import { NavBar } from "./components/NavBar";
+import { Vault } from "./components/Vault";
 import { theme } from "./theme";
 import { formatAddress } from "./utils";
 
@@ -74,16 +76,11 @@ export const App = () => {
               }
             </Grid>
             <Flex flexWrap='wrap' gap='2rem' m='2rem' p='2rem' maxHeight='50rem' overflow='auto'>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
-              <Box w='calc((100% - 4rem)/3)' h='23.75rem' bg='#5394ff' borderRadius='1rem'></Box>
+              {pools.map(p => 
+                <Box w='calc((100% - 4rem)/3)' >
+                  <Vault pool={p}/>
+                </Box>
+              )}
             </Flex>
           </Grid>
         </Grid>

@@ -61,7 +61,7 @@ export const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" maxHeight="60rem" background='#000000' templateColumns='1fr 8fr'>
+        <Grid height="100vh" overflow='hidden' background='#000000' templateColumns='1fr 8fr'>
           <NavBar />
           <Grid p={3} templateRows='3rem 1fr'>
             <Grid templateColumns='1fr 9rem'>

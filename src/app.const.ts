@@ -1,10 +1,10 @@
 import { Token } from "./types"
 
 export const tokens: Token[] = [{
-  id: 'BTC',
+  id: 'WBTC',
   name: 'bitcoin'
 }, {
-  id: 'ETH',
+  id: 'WETH',
   name: 'ethereum'
 }, {
   id: 'LINK',
@@ -21,6 +21,12 @@ export const tokens: Token[] = [{
 }, {
   id: 'LUNA',
   name: 'terra'
+}, {
+  id: 'alETH',
+  name: 'ethereum'
+}, {
+  id: 'alUSD',
+  name: 'tether'
 }]
 
 export const pools = [

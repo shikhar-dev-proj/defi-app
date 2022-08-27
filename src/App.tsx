@@ -27,7 +27,6 @@ export const App = () => {
   async function connect() {
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
-      console.log(provider)
       let accounts = await provider.send("eth_requestAccounts", [])
       let account = accounts[0]
       setAddress(account)
@@ -38,7 +37,7 @@ export const App = () => {
   const poolHasEth = (p: any): boolean => token0(p.pairName).id === 'WETH' || token1(p.pairName).id === 'WETH'
 
   async function getProfileAttributes(address: string) {
-    const res: any = await axios.get(`http://idu-onboarding-qa.zeotap.net/get/${address}`)
+    const res: any = await axios.get(`http://idu-onboarding-qa.zeotap.net/get/premia/${address}`)
 
     if (res.data?.pool) {
       const interestedInEth = !!res.data.pool.find((p: any) => {

@@ -57,10 +57,6 @@ export const Vault = ({pool, key}: PoolProps) => {
           <Heading fontSize='0.8rem' color='#5394ff'>{formatBigNumber(pool.averageReturn)}</Heading>
         </HStack>
         <Image src='divider.svg' mt={2} mb={2}/>
-        <HStack justifyContent='space-between' width='100%' pl='2rem' pr='2rem'>
-          <Text fontSize='0.8rem' color='#5394ff'>Started at</Text>
-          <Heading fontSize='0.8rem' color='#5394ff'>{new Date(+pool.startTimestamp).toString().slice(0, 16)}</Heading>
-        </HStack>
       </VStack>
     </Box>
   )

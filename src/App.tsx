@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Box, ChakraProvider, Flex, Grid,
   Spacer,
   Spinner,
@@ -22,7 +24,7 @@ export const App = () => {
   const { hasCopied, onCopy } = useClipboard(address);
 
   const [personalisedPools, setPersonalisedPools] = useState([...pools])
-  const [snackbar, setSnackbar] = useState(false)
+  const [snackbar, setSnackbar] = useState<{ type: string, message: string}>({ type: '', message: ''})
 
   async function connect() {
     if (window.ethereum) {
@@ -52,6 +54,7 @@ export const App = () => {
             return 1
           } else return 0
         }))
+        setSnackbar({type: 'opportunity', message: 'We recommend you to invest in stablecoin pools (DAI/USDT) based on your transactions'})
       }
     }
   }
@@ -84,6 +87,10 @@ export const App = () => {
               }
             </Grid>
             <Flex flexWrap='wrap' gap='4rem' m='2rem' p='2rem' maxHeight='50rem' overflow='auto'>
+              {snackbar.type ? <Alert cursor='pointer' status={snackbar.type === 'opportunity' ? 'warning' : 'success'} variant='solid'>
+                <AlertIcon /> 
+                {snackbar.message}
+              </Alert>: null}
               {personalisedPools.map((p, i) => 
                 <Box w='calc((100% - 10rem)/3)' >
                   <Vault key={i} pool={p}/>

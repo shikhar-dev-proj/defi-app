@@ -62,7 +62,7 @@ export const App = () => {
 
   useEffect(() => {
     if (address) {
-      getProfileAttributes('0x022e3ce4eda264b3e3fef62036c8182ceb88e6ce' || address)
+      getProfileAttributes(address)
     }
   }, [address])
 
